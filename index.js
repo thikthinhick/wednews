@@ -10,7 +10,6 @@ var page = require('./controller/page/pagemiddle')
 var admin = require('./controller/admin/middleadmin')
 var conn = require('./connectDatabase/Connection');
 const app = express();
-const port = 3000;
 var multer  = require('multer');
 const { render } = require('pug');
 const cookieParser = require('cookie-parser');
@@ -140,5 +139,5 @@ app.get('/admin',admin)
 
 app.get('/news/timkiem', timkiem.search);
 app.get('/page/:idtintuc', page.loadpage)
-app.listen(port, function(){
+app.listen(process.env.PORT, function(){
 })
