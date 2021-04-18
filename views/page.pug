@@ -32,7 +32,7 @@ head
       .col-3.loginvspost
         if data3.length > 0
           .user-account(style='display: flex;')
-            #anhdaidien(style='background-image:url(../IMG/avatar2.png); text-align: center; margin: 0px; padding: 0px; color: white;') &nbsp;
+            #anhdaidien(style='background-image:url(../img/avatar2.png); text-align: center; margin: 0px; padding: 0px; color: white;') &nbsp;
             span#name #{data3[0].userName}
             .signout
               i.bi.bi-bell-fill(onclick = "clickNotification('" + data3[0].idUser + "')" style="position: relative;")
@@ -174,28 +174,28 @@ head
           ul.list-item(style='display: flex;')
             li.col-3
               a(href='')
-                .item(style='background-image: url(../IMG/image4.jpg); height:100px;')
+                .item(style='background-image: url(../img/image4.jpg); height:100px;')
                 span
                   | One of my best photos Etiam ultricies nisi vel augue. Curabitur ullamcorper
                   | ultricies
                   | nisi.
             li.col-3
               a(href='' style='height: 100%')
-                .item(style='background-image: url(../IMG/image4.jpg); height:100px;')
+                .item(style='background-image: url(../img/image4.jpg); height:100px;')
                 span
                   | One of my best photos Etiam ultricies nisi vel augue. Curabitur ullamcorper
                   | ultricies
                   | nisi.
             li.col-3
               a(href='' style='height: 100%')
-                .item(style='background-image: url(../IMG/image4.jpg); height:100px;')
+                .item(style='background-image: url(../img/image4.jpg); height:100px;')
                 span
                   | One of my best photos Etiam ultricies nisi vel augue. Curabitur ullamcorper
                   | ultricies
                   | nisi.
             li.col-3
               a(href='' style='height: 100%')
-                .item(style='background-image: url(../IMG/image4.jpg); height:100px;')
+                .item(style='background-image: url(../img/image4.jpg); height:100px;')
                 span
                   | One of my best photos Etiam ultricies nisi vel augue. Curabitur ullamcorper
                   | ultricies
@@ -208,7 +208,7 @@ head
               each value in data2
                 li.comment-item
                   .khung-left
-                    .hinhanh(style='background-image:url("../IMG/avatar2.png")')
+                    .hinhanh(style='background-image:url("../img/avatar2.png")')
                   .khung-right
                     .main
                       .username-comment= value.userName
@@ -230,9 +230,9 @@ head
                     ul.danhsach(id = "danhsach" + value.idbinhluan style='display: none;')    
     .col-4
       .quangcao
-        .hinhanh-quangcao(style='background-image:url(../IMG/banner-02.jpg);')
+        .hinhanh-quangcao(style='background-image:url(../img/banner-02.jpg);')
       .quangcao
-        .hinhanh-quangcao(style='background-image:url(../IMG/likeandsub.jpg);')
+        .hinhanh-quangcao(style='background-image:url(../img/likeandsub.jpg);')
 script(src="../js/account.js")
 script.
   function binhluanbai() {
@@ -251,7 +251,7 @@ script.
     function(data, status){
        var value = '<li class="comment-item">'
                 + '<div class="khung-left">'
-                + '<div class="hinhanh" style="background-image:url(../IMG/avatar2.png)">' + '</div>'
+                + '<div class="hinhanh" style="background-image:url(../img/avatar2.png)">' + '</div>'
                 + '</div>'
                 + '<div class="khung-right">'
                 + '<div class="main">'
@@ -337,7 +337,7 @@ script.
         var noidung = $('#inputtraloi' + id).val();
     var x = '<li class="comment-item">'
             + '<div class="khung-left">'
-            +	'<div class="hinhanh" style="background-image:url(../IMG/avatar2.png);"></div></div>'
+            +	'<div class="hinhanh" style="background-image:url(../img/avatar2.png);"></div></div>'
             + '<div class="khung-right">'
             + '<div class="main">'
             + '<div class="username-comment">' + data[i].userName + '</div>'
