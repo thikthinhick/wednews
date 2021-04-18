@@ -1,0 +1,60 @@
+
+head
+  meta(charset='utf-8')
+  link(rel='stylesheet' href='./Css/login.css')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+.wrapper
+  .title-text
+    .title.login
+      | Login Form
+    .title.signup
+      | Signup Form
+  .form-container
+    .slide-controls
+      input#login(type='radio' name='slide' checked='')
+      input#signup(type='radio' name='slide')
+      label.slide.login(for='login') Login
+      label.slide.signup(for='signup') Signup
+      .slider-tab
+    .form-inner
+      form.login(action='/xulilogin' method="POST")
+        .field
+          input(id="username" type='text' placeholder='User Name' required='' name = "Username")
+        .field
+          input(type='password' placeholder='Password' required='' name = "Password")
+        .pass-link
+          a(href='#') Forgot password?
+        .field.btn
+          .btn-layer
+          input(type='submit' value='Login')
+        .signup-link
+          | Not a member? 
+          a(href='') Signup now
+      form.signup(action='/xulitao' method = "POST")
+        .field
+          input(type='text' placeholder='UserName' required='' name = "Username")
+        .field
+          input(type='password' placeholder='Password' required='' name = "Password")
+        .field
+          input(type='password' placeholder='Confirm password' required='' name = "Confirmpassword")
+        .field.btn
+          .btn-layer
+          input(type='submit' value='Signup')
+script.
+  const loginText = document.querySelector(".title-text .login");
+  const loginForm = document.querySelector("form.login");
+  const loginBtn = document.querySelector("label.login");
+  const signupBtn = document.querySelector("label.signup");
+  const signupLink = document.querySelector("form .signup-link a");
+  signupBtn.onclick = (()=>{
+  loginForm.style.marginLeft = "-50%";
+  loginText.style.marginLeft = "-50%";
+  });
+  loginBtn.onclick = (()=>{
+  loginForm.style.marginLeft = "0%";
+  loginText.style.marginLeft = "0%";
+  });
+  signupLink.onclick = (()=>{
+  signupBtn.click();
+  return false;
+  });

@@ -1,0 +1,42 @@
+.body-search{
+    margin-top: 40px;
+}
+.body-search .form-timkiem{
+    position: relative;
+}
+.body-search button{
+    position: absolute;
+    right: 5px;
+    top: 3px;
+    padding: 2px;
+    border-radius: 2px;
+}
+.body-search .soketqua{
+    padding: 5px;
+    margin-top: 4px;
+}
+.list-item .item{
+    box-sizing: content-box;
+    height: 200px;
+    padding: 20px 0px;
+    border-bottom: 1px solid 
+    #909090;
+    margin: 10px 0px;
+}
+.list-item .item a{
+    display: flex;
+    justify-content: space-between;
+    color: black;
+}
+.item a .image-news{
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    flex: 2;
+}
+.item a .item-date-title{
+    margin-left: 10px;
+    flex:3;
+    font-size: 14px;
+}

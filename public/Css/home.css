@@ -1,0 +1,303 @@
+.header-2{
+    margin-top: 20px;
+}
+.header-3{
+    height: 300px;
+}
+.header-3 .row{
+    height: 370px;
+    padding:0 12px;
+}
+.header-3 .row .col-lg-6 {
+    height: 100%;
+}
+.header-3 .row .col-lg-6 .item1{
+    width: 100%;
+    height: 50%;
+}
+.header-3 .row .col-lg-6 .item2{
+    margin-right:2px;
+}
+.header-3 .row .col-lg-6 .item3{
+    margin-left:2px;
+}
+.col-lg-6 .double-item{
+    display: flex;
+    height:49%;
+    margin-top: 3px;
+    justify-content: space-between;
+}
+.double-item .item2, .item3{
+    height: 100%;
+    width: 50%;
+}
+.row .items-right{
+    margin-top: 24px;
+    padding-left: 4px;
+    height: 100%;
+}
+
+/* css item */
+.item {
+    position: relative;
+    color:#fff;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-weight: 500;
+    filter:brightness(90%);
+}
+.item:hover{
+    filter:brightness(100%);
+    transform: scale(1.01);
+    transition:ease-in 0.2s;
+}
+.item .text-title {
+    position: absolute;
+    bottom: 20%;
+    margin: 0 2%;
+    text-align: center;
+}
+
+.item .user-item {
+    position: absolute;
+    font-size: 14px;
+    bottom: 3%;
+    left: 3%;
+    font-weight: 300;
+}
+
+.item .date-item {
+    position: absolute;
+    font-size: 14px;
+    bottom: 3%;
+    right: 3%;
+    font-weight: 300;
+}
+
+.item .style-item {
+    position: absolute;
+    background-color: red;
+    padding: 0 10px;
+    padding-bottom: 2px;
+    font-size: 12px;
+    align-items: center;
+    border-radius: 2px;
+    top: 4px;
+    left: 4px;
+}
+
+.header-4{
+    margin-top: 150px;
+}
+.header-4 .row .col-4{
+    height: 350px;
+}
+.header-4 .row .col-4 span{
+    font-size: 14px;
+}
+.header .title{
+    background-color: orange;
+    width: 100px;
+    margin-bottom: 10px;
+    text-align: center;
+    font: 400;
+    color: white;
+    font-size: 14px;
+}
+
+.header-5{
+    margin-top: 120px;
+    font-size: 14px;
+}
+
+.header-5 .row .col-4 a{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: black;
+}
+.header-5 .row .col-4 a .item{
+    flex: 2;
+}
+.header-5 .row .col-4 a .title-date{
+    flex: 3;
+}
+.header-5 .row {
+    margin-top: 13px;
+    height: 85px;
+}
+.header-5 .row .col-4 .item{
+    margin-right: 10px;
+}
+
+.header-7{
+    margin-top: 100px;
+}
+.header-7 .title{
+    padding:4px;
+    background-color: #e71d69;
+}
+.header-7-left li a{
+    height: 180px;
+    display: flex;
+    font-size: 14px;
+    margin-bottom: 40px;
+    color: black;
+    padding-right: 30px;
+}
+.header-7 .row{
+    padding-top: 15px;
+}
+.header-7-left li a .item{
+    flex: 2;
+}
+.header-7-left li .title-date-user{
+    flex: 3;
+    margin-left: 30px;
+}
+.lastest-post{
+    font-size: 14px;
+}
+.lastest-post h4{
+    border: 1px solid #5555;
+    border-left: 5px solid #e71d69;
+    padding: 5px;
+}
+.lastest-post ul li a{
+    height: 70px;
+    display: flex;
+    margin-top: 30px;
+    color: black;
+}
+.lastest-post ul li a .item{
+    flex: 2;
+}
+.lastest-post ul li a .title-date-user{
+    flex: 5;
+    margin-left: 20px;
+}
+.tags{
+    margin-top: 40px;
+}
+.tags h4{
+    border: 1px solid #5555;
+    border-left: 5px solid #e71d69;
+    padding: 5px;
+}
+.tags .row{
+    margin-left: 0px;
+    margin-top: 10px;
+}
+.charts-music{
+    width:100%;
+    height: calc(100% - 720px)
+}
+.music-list li{
+    display: flex;
+    height: 20px;
+}
+.tags .row .tag-item{
+    background-color: olivedrab;
+    margin: 2px;
+    padding: 2px;
+    text-align: center;
+    font-size: 14px;
+}
+.hinhanhquangcao{
+    height:500px;
+    margin-left:25px;
+}
+.hinhanhquangcao img{
+    height: 100%;
+}
+.carousel-item .float-left{
+    padding: 10px;
+}
+.header-8{
+    margin-top: 30px;
+}
+.header-8 .container{
+    background-color:#585858;
+    border-radius: 4px;
+}
+.header-9{
+    margin-top: 150px;
+    height: 380px;
+}
+.header-9 .body-Entertain .right-item span{
+    font-size: 13px;
+}
+.row{
+    height: 100%;
+}
+.row .body-Entertain{
+    height: 100%;
+    display: flex;
+    padding: 20px 0px;
+}
+.body-Entertain .left,.right{
+    padding: 0px;
+}
+.body-Entertain .left h4{
+    margin-top: 20px;
+}
+.body-Entertain .right .right-item{
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.body-Entertain .right .right-item a{
+    display: flex;
+    height: 100px;  
+}
+.body-Entertain .right .right-item a .title-date{
+    margin-left: 10px;
+    font-size: 14px;
+    color: black;
+    flex:4;
+}
+.body-Entertain .right .right-item a .item{
+    flex: 3;
+}
+.body-Entertain .date-title{
+    font-size: 14px;
+}
+.header-9 .row .col-8 .thanhcongcu{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #5555;
+    border-left: 5px solid #e71d69;
+}
+.Most-popular{
+    border: 1px solid #5555;
+    height: 41px;
+    border-left: 5px solid #e71d69;
+}
+.Most-popular h4{
+    margin-top: 4px;
+    margin-left: 5px;
+}
+.Most-popular .list-most li{
+    padding: 20px 5px;
+}
+.Most-popular .list-most li span{
+    background-color: #585858;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+.Most-popular .list-most li a{
+    color: black;
+    font-size: 14px;
+    font-weight: bolder;
+}
+.row .col-8 .thanhcongcu a{
+    margin-top: 7px;
+    margin-right: 5px;
+    color: black;
+}
+.row .col-8 .thanhcongcu h4{
+    margin-top: 3px;
+    margin-left: 4px;
+}

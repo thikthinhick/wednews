@@ -1,0 +1,580 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css')
+  link(href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet")
+  link(rel="preconnect" href="https://fonts.gstatic.com")
+  link(rel="shortcut icon" type="image/png" href="img/icon.ico")
+  link(href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet")
+  link(href="https://fonts.googleapis.com/css2?family=Montserrat" rel="stylesheet")
+  link(rel='stylesheet' href='./Css/home.css')
+  link(rel='stylesheet' href='./Css/footer.css')
+  link(rel='stylesheet' href='./Css/header.css')
+  title Trang chủ
+.header
+  .container
+    .row.header-1
+      .col-4
+        a.logo(href="/")
+          | NEWSPAPER
+        span.logo-title
+          | Trang tin &dstrok;i&#x1EC7;n t&#x1EED;
+      .col-5
+        .search
+          form(action='news/timkiem' method="get")
+            input.input-search(type='text' placeholder='Nhập từ khóa cần tìm kiếm' name="timkiem")
+            a(href='/')
+              i.bi.bi-search
+      .col-3.loginvspost
+        if user
+          .user-account(style='display: flex;')
+            #anhdaidien(style='background-image:url(IMG/avatar2.png); text-align: center; margin: 0px; padding: 0px; color: white;')
+            span #{user.userName}
+            .signout
+              i.bi.bi-bell-fill(onclick = "clickNotification('" + user.idUser + "')" style="position: relative;")
+                if user.soluongthongbao > 0
+                  #soluong-thongbao(style="position: absolute;font-size: 10px; padding: 1px;")= user.soluongthongbao
+              .thongbao-signout(style='position:absolute;' id = "yyyy")
+            .signout
+              i.bi.bi-caret-down-fill(onclick="clicksignout()")
+              ul.signout-child#xxxx
+                li
+                  i.bi.bi-gear-fill
+                  | C&agrave;i &dstrok;&#x1EB7;t
+                li
+                  a(href='/dangxuat')
+                    i.bi.bi-box-arrow-right
+                    | &Dstrok;&abreve;ng xu&#x1EA5;t
+        else
+          a.user-post(href='/login', re)
+            span.text-login
+              i.fa.fa-user-o &nbsp;
+              |Đăng nhập
+  .header-navbar
+    ul.list.container
+      li.button
+        a.button-link(href='/chude/theloai11')
+          | TH&#x1EDC;I S&#x1EF0;
+      li.button
+        a.button-link(href='/chude/theloai1')
+          | TH&#x1EBE; GI&#x1EDA;I
+      li.button
+        a.button-link(href='/chude/theloai7')
+          | GI&#x1EA2;I TR&Iacute;
+      li.button
+        a.button-link(href='/chude/theloai12')
+          | TH&#x1EC2; THAO
+      li.button
+        a.button-link(href='/chude/theloai10')
+          | KHOA H&#x1ECC;C
+      li.button
+        a.button-link(href='/chude/theloai8')
+          | PH&Aacute;P LU&#x1EAC;T
+      .list-bar
+        #btn
+          i.bi.bi-list
+        #cancle
+          i.bi.bi-x
+        #sautatca.header-navbar-other
+          ul.container
+            .row
+              .col-2.navbar-other-item
+                a.danhmuc(href='') Th&#x1EBF; gi&#x1EDB;i
+                div
+                ul.chil-danhmuc
+                  li
+                    
+                    a(href='')
+                      i.bi.bi-chevron-down &nbsp; Qu&acirc;n s&#x1EF1;
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; Covid-19
+              .col-2.navbar-other-item
+                a.danhmuc(href='') X&atilde; h&#x1ED9;i
+                div
+                ul.chil-danhmuc
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; Th&#x1EDD;i s&#x1EF1;
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; Giao Th&ocirc;ng
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; M&ocirc;i tr&#x1B0;&#x1EDD;ng
+              .col-2.navbar-other-item
+                a.danhmuc(href='') C&ocirc;ng ngh&#x1EC7;
+                div
+                ul.chil-danhmuc
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; &Dstrok;i&#x1EC7;n tho&#x1EA1;i
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; M&aacute;y t&iacute;nh b&#x1EA3;ng
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; Laptop
+              .col-2.navbar-other-item
+                a.danhmuc(href='') Th&#x1EC3; thao
+                div
+                ul.chil-danhmuc
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; B&oacute;ng &dstrok;&aacute;
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; Qu&#x1EA7;n v&#x1EE3;t
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; B&oacute;ng r&#x1ED5;
+              .col-2.navbar-other-item
+                a.danhmuc(href='') Gi&aacute;o d&#x1EE5;c
+                div
+                ul.chil-danhmuc
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; Tuy&#x1EC3;n sinh
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; H&#x1ECD;c b&#x1ED5;ng
+              .col-2.navbar-other-item
+                a.danhmuc(href='') V&abreve;n h&oacute;a
+                div
+                ul.chil-danhmuc
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; &#x1EA8;m th&#x1EF1;c
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; Du l&#x1ECB;ch
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; Ngh&#x1EC7; thu&#x1EAD;t
+  .header-2.container(style="padding: 0 11px;")
+    img(src='IMG/quangcao.png' alt='' style="width:100%;")
+  .header-3.container
+    .row
+      .col-lg-6
+        #carouselExampleIndicators.carousel.slide.my-4(data-ride='carousel' data-interval='7000')
+          ol.carousel-indicators
+            li.active(data-target='#carouselExampleIndicators' data-slide-to='0')
+            li(data-target='#carouselExampleIndicators' data-slide-to='1')
+            li(data-target='#carouselExampleIndicators' data-slide-to='2')
+          .carousel-inner(role='listbox')
+            .carousel-item.active
+              a(href='page/' + data[0].id_tintuc)
+                .item(style='height: 370px; background-image:url(' + data[0].url+ ')')
+                  .style-item= data[0].tentheloai
+                  h4.text-title= data[0].tieude
+                  .user-item
+                    i.bi.bi-people &nbsp;
+                    span= data[0].username
+                  .date-item
+                    i.bi.bi-clock &nbsp;
+                    span= data[0].ngaydang
+            .carousel-item
+              a(href='')
+                .item(style='height: 370px; background-image:url(' + data[1].url + ');')
+                  .style-item= data[1].tentheloai
+                  h4.text-title= data[1].tieude
+                  .user-item
+                    i.bi.bi-people &nbsp; 
+                    span= data[1].username
+                  .date-item
+                    i.bi.bi-clock &nbsp;
+                    span= data[1].ngaydang
+            .carousel-item
+              a(href='')
+                .item(style='height: 370px; background-image:url(' +data[2].url + ')')
+                  .style-item= data[2].tentheloai
+                  h4.text-title= data[2].tieude
+                  .user-item
+                    i.bi.bi-people &nbsp;
+                    span= data[2].username
+                  .date-item
+                    i.bi.bi-clock &nbsp;
+                    span= data[2].ngaydang
+          a.carousel-control-prev(href='#carouselExampleIndicators' role='button' data-slide='prev')
+            span.carousel-control-prev-icon(aria-hidden='true')
+            span.sr-only Previous
+          a.carousel-control-next(href='#carouselExampleIndicators' role='button' data-slide='next')
+            span.carousel-control-next-icon(aria-hidden='true')
+            span.sr-only Next
+      .col-lg-6.items-right
+        .item1
+          a.hover-dark(href='')
+            .item(style="background-image:url(" + data[3].url +')')
+              .style-item= data[3].tentheloai
+              h4.text-title= data[3].tieude
+              .user-item
+                i.bi.bi-people &nbsp;
+                span= data[3].username
+              .date-item
+                i.bi.bi-clock &nbsp;
+                span= data[3].ngaydang
+        .double-item
+          .item2
+            a(href='')
+              .item(style="background-image:url(" + data[4].url +')')
+                .style-item= data[4].tentheloai
+                h6.text-title= data[4].tieude
+                .user-item
+                  i.bi.bi-people &nbsp; 
+                  span= data[4].username
+                .date-item
+                  i.bi.bi-clock &nbsp;
+                  span= data[4].ngaydang
+          .item3
+            a(href='')
+              .item(style="background-image:url(" + data[5].url +')')
+                .style-item= data[5].tentheloai
+                h6.text-title= data[5].tieude
+                .user-item
+                  i.bi.bi-people &nbsp;
+                  span= data[4].username
+                .date-item
+                  i.bi.bi-clock &nbsp;
+                  span= data[5].ngaydang
+  .header-9.container
+    .row
+      .col-8
+        .thanhcongcu
+          h4 Entertainment
+          a(href='') All
+          a(href='') Celebrity
+          a(href='') Movie
+          a(href='') Music
+          a(href='') Games
+        .body-Entertain
+          .left.col-6
+            a(href='')
+              .item(style='height: 86%; background-image: url(' + data[6].url + ');')
+            h4= data[6].tieude
+            .date-title
+              span= data[6].username
+              span -
+              span= data[6].ngaydang
+          ul.right.col-6
+            li.right-item
+              a(href='')
+                .item(style='background-image:url(' + data[7].url + ')')
+                .title-date
+                  span= data[7].tieude
+                  .date-item
+                    i.bi.bi-clock &nbsp;
+                    span= data[7].ngaydang
+            li.right-item
+              a(href='')
+                .item(style='background-image:url(' + data[8].url + ')')
+                .title-date
+                  span= data[8].tieude
+                  .date-item
+                    i.bi.bi-clock &nbsp;
+                    span= data[8].ngaydang
+            li.right-item
+              a(href='')
+                .item(style='background-image:url(' + data[9].url + ')')
+                .title-date
+                  span= data[9].tieude
+                  .date-item
+                    i.bi.bi-clock &nbsp;
+                    span= data[9].ngaydang
+      .col-4
+        .Most-popular
+          h4 Most Popular
+          ul.list-most
+            li
+              span 1
+              a(href='') &nbsp;Thời tiết hôm nay
+            li
+              span 2
+              a(href='') &nbsp;Bầu cử tổng thống mĩ
+            li
+              span 3
+              a(href='') &nbsp;Covid-19
+            li
+              span 4
+              a(href='') &nbsp;Xổ số kiến thiết
+            li
+              span 5
+              a(href='') &nbsp;Zeros bị cấp thi đấu vĩnh viễn
+  .header-4.container
+    .title TIN N&#x1ED4;I B&#x1EAC;T
+    ul.row
+      li.col-4
+        a(href='')
+          .item(style='background-image:url(' + data[10].url + ')')
+            .style-item= data[10].tentheloai
+            h4.text-title= data[10].tieude
+            .user-item
+              i.bi.bi-people &nbsp;
+              span= data[10].username
+            .date-item
+              i.bi.bi-clock &nbsp;
+              span= data[10].ngaydang
+        span= data[10].tomtat
+      li.col-4
+        a(href='')
+          .item(style='background-image:url(' + data[11].url + ')')
+            .style-item= data[11].tentheloai
+            h4.text-title= data[11].tieude
+            .user-item
+              i.bi.bi-people &nbsp;
+              span= data[11].username
+            .date-item
+              i.bi.bi-clock &nbsp;
+              span= data[11].ngaydang
+        span= data[11].tomtat
+      li.col-4
+        a(href='')
+          .item(style='background-image:url(' + data[12].url + ')')
+            .style-item= data[12].tentheloai
+            h4.text-title= data[12].tieude
+            .user-item
+              i.bi.bi-people &nbsp;
+              span= data[12].username
+            .date-item
+              i.bi.bi-clock &nbsp;
+              span= data[12].ngaydang
+        span= data[12].tomtat
+  .header-5.container
+    .title &Dstrok;&Aacute;NG CH&Uacute; &Yacute;
+    ul.row
+      li.col-4
+        a(href='')
+          .item(style='background-image: url(' + data[13].url + ');')
+          .title-date
+            span= data[13].tieude
+            .date-item
+              i.bi.bi-clock &nbsp;
+              span= data[13].ngaydang
+      li.col-4
+        a(href='')
+          .item(style='background-image: url(' + data[14].url + ');')
+          .title-date
+            span= data[14].tieude
+            .date-item
+              i.bi.bi-clock &nbsp;
+              span= data[14].ngaydang
+      li.col-4
+        a(href='')
+          .item(style='background-image: url(' + data[15].url + ');')
+          .title-date
+            span= data[15].tieude
+            .date-item
+              i.bi.bi-clock &nbsp;
+              span= data[15].ngaydang
+    ul.row
+      li.col-4
+        a(href='')
+          .item(style='background-image: url(' + data[16].url + ');')
+          .title-date
+            span= data[16].tieude
+            .date-item
+              i.bi.bi-clock &nbsp;
+              span= data[16].ngaydang
+      li.col-4
+        a(href='')
+          .item(style='background-image: url(' + data[17].url + ');')
+          .title-date
+            span= data[17].tieude
+            .date-item
+              i.bi.bi-clock &nbsp;
+              span= data[17].ngaydang
+      li.col-4
+        a(href='')
+          .item(style='background-image: url(' + data[18] + ');')
+          .title-date
+            span= data[18].tieude
+            .date-item
+              i.bi.bi-clock &nbsp;
+              span= data[18].ngaydang
+  .header-7.container
+    span.title
+      | M&#x1EDA;I C&#x1EAC;P NH&#x1EAC;T
+    .row
+      ul.col-8.header-7-left
+        li
+          a(href='')
+            .item(style='background-image: url(IMG/image1.jpg);')
+            .title-date-user
+              h3
+                | Donec metus orci, malesuada et lectus vitae
+              span
+                | Accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
+                | inventore
+                | veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+                | voluptatem quia voluptas sit&mldr;
+              .date-item
+                i.bi.bi-people &nbsp;
+                span ChuongLe &emsp;
+                i.bi.bi-clock &nbsp;
+                span 12-12-2020
+        li
+          a(href='')
+            .item(style='background-image: url(IMG/image2.jpg);')
+            .title-date-user
+              h3
+                | The art of racing with speed &ndash; Motor GP
+              span
+                | Accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
+                | inventore
+                | veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+                | voluptatem quia voluptas sit&mldr;
+              .date-item
+                i.bi.bi-people &nbsp;
+                span ChuongLe &emsp;
+                i.bi.bi-clock &nbsp;
+                span 12-12-2020
+        li
+          a(href='')
+            .item(style='background-image: url(IMG/image3.jpg);')
+            .title-date-user
+              h3
+                | The art of racing with speed &ndash; Motor GP
+              span
+                | Accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
+                | inventore
+                | veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+                | voluptatem quia voluptas sit&mldr;
+              .date-item
+                i.bi.bi-people &nbsp;
+                span ChuongLe &emsp;
+                i.bi.bi-clock &nbsp;
+                span 12-12-2020
+        li
+          a(href='')
+            .item(style='background-image: url(IMG/image4.jpg);')
+            .title-date-user
+              h3
+                | The art of racing with speed &ndash; Motor GP
+              span
+                | Accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
+                | inventore
+                | veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+                | voluptatem quia voluptas sit&mldr;
+              .date-item
+                i.bi.bi-people &nbsp;
+                span ChuongLe &emsp;
+                i.bi.bi-clock &nbsp;
+                span 12-12-2020
+        li
+          a(href='')
+            .item(style='background-image: url(IMG/image5.jpg);')
+            .title-date-user
+              h3
+                | The art of racing with speed &ndash; Motor GP
+              span
+                | Accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
+                | inventore
+                | veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+                | voluptatem quia voluptas sit&mldr;
+              .date-item
+                i.bi.bi-people &nbsp;
+                span ChuongLe &emsp;
+                i.bi.bi-clock &nbsp;
+                span 12-12-2020
+        li
+          a(href='')
+            .item(style='background-image: url(IMG/image6.jpg);')
+            .title-date-user
+              h3
+                | The art of racing with speed &ndash; Motor GP
+              span
+                | Accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
+                | inventore
+                | veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+                | voluptatem quia voluptas sit&mldr;
+              .date-item
+                i.bi.bi-people &nbsp;
+                span ChuongLe &emsp;
+                i.bi.bi-clock &nbsp;
+                span 12-12-2020
+        li
+          a(href='')
+            .item(style='background-image: url(IMG/image7.jpg);')
+            .title-date-user
+              h3
+                | The art of racing with speed &ndash; Motor GP
+              span
+                | Accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
+                | inventore
+                | veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+                | voluptatem quia voluptas sit&mldr;
+              .date-item
+                i.bi.bi-people &nbsp;
+                span ChuongLe &emsp;
+                i.bi.bi-clock &nbsp;
+                span 12-12-2020
+      .col-4
+        .lastest-post
+          h4 Lastest Post
+          ul
+            li
+              a(href='')
+                .item(style='background-image: url(IMG/image6.jpg);')
+                .title-date-user
+                  h6
+                    | Donec metus orci, malesuada et lectus vitae
+                  .date-item
+                    i.bi.bi-clock &nbsp;
+                    span 12-12-2020
+            li
+              a(href='')
+                .item(style='background-image: url(IMG/image7.jpg);')
+                .title-date-user
+                  h6
+                    | Donec metus orci, malesuada et lectus vitae
+                  .date-item
+                    i.bi.bi-clock &nbsp;
+                    span 12-12-2020
+            li
+              a(href='')
+                .item(style='background-image: url(IMG/image8.jpg);')
+                .title-date-user
+                  h6
+                    | Donec metus orci, malesuada et lectus vitae
+                  .date-item
+                    i.bi.bi-clock &nbsp;
+                    span 12-12-2020
+            li
+              a(href='')
+                .item(style='background-image: url(IMG/image9.jpg);')
+                .title-date-user
+                  h6
+                    | Donec metus orci, malesuada et lectus vitae
+                  .date-item
+                    i.bi.bi-clock &nbsp;
+                    span 12-12-2020
+        .tags
+          h4 Tags
+          .row
+            span.col-2.tag-item Eport
+            span.col-2.tag-item Esport
+            span.col-2.tag-item Food
+            span.col-2.tag-item Mobile
+          .row
+            span.col-3.tag-item Eport
+            span.col-2.tag-item Esport
+            span.col-3.tag-item Food
+            span.col-2.tag-item Mobile
+          .row
+            span.col-2.tag-item Eport
+            span.col-2.tag-item Esport
+            span.col-4.tag-item Food
+            span.col-2.tag-item Mobile
+          .row
+            span.col-2.tag-item Eport
+            span.col-3.tag-item Esport
+            span.col-2.tag-item Food
+            span.col-2.tag-item Mobile
+include footer.pug
+script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
+script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous')
+script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous')
+script(src='./js/account.js')

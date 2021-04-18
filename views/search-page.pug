@@ -1,0 +1,133 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css')
+  link(rel="preconnect" href="https://fonts.gstatic.com")
+  link(rel="shortcut icon" type="image/png" href="img/icon.ico")
+  link(href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet")
+  link(href="https://fonts.googleapis.com/css2?family=Montserrat" rel="stylesheet")
+  link(rel="stylesheet" href="../Css/footer.css")
+  link(rel='stylesheet' href='../Css/search-page.css')
+  link(rel='stylesheet' href='../Css/header.css')
+  title Trang chủ
+.header
+  .container
+    .row.header-1
+      .col-4
+        a.logo(href="/")
+          | NEWSPAPER
+        span.logo-title
+          | Trang tin &dstrok;i&#x1EC7;n t&#x1EED;
+      .col-5
+        .search
+          form(action='/page/timkiem' method="get")
+            input.input-search(type='text' placeholder='Nhập từ khóa cần tìm kiếm' name="timkiem")
+            a(href='/')
+              i.bi.bi-search
+  .header-navbar
+    ul.list.container
+      li.button
+        a.button-link(href='')
+          | TH&#x1EDC;I S&#x1EF0;
+      li.button
+        a.button-link(href='')
+          | TH&#x1EBE; GI&#x1EDA;I
+      li.button
+        a.button-link(href='')
+          | GI&#x1EA2;I TR&Iacute;
+      li.button
+        a.button-link(href='')
+          | TH&#x1EC2; THAO
+      li.button
+        a.button-link(href='')
+          | KHOA H&#x1ECC;C
+      li.button
+        a.button-link(href='')
+          | PH&Aacute;P LU&#x1EAC;T
+      .list-bar
+        #btn
+          i.bi.bi-list
+        #cancle
+          i.bi.bi-x
+        #sautatca.header-navbar-other
+          ul.container
+            .row
+              .col-2.navbar-other-item
+                a.danhmuc(href='') Th&#x1EBF; gi&#x1EDB;i
+                div
+                ul.chil-danhmuc
+                  li
+                    a(href='') Qu&acirc;n s&#x1EF1;
+                  li
+                    a(href='') Covid-19
+              .col-2.navbar-other-item
+                a.danhmuc(href='') X&atilde; h&#x1ED9;i
+                div
+                ul.chil-danhmuc
+                  li
+                    a(href='') Th&#x1EDD;i s&#x1EF1;
+                  li
+                    a(href='') Giao Th&ocirc;ng
+                  li
+                    a(href='') M&ocirc;i tr&#x1B0;&#x1EDD;ng
+              .col-2.navbar-other-item
+                a.danhmuc(href='') C&ocirc;ng ngh&#x1EC7;
+                div
+                ul.chil-danhmuc
+                  li
+                    a(href='') &Dstrok;i&#x1EC7;n tho&#x1EA1;i
+                  li
+                    a(href='') M&aacute;y t&iacute;nh b&#x1EA3;ng
+                  li
+                    a(href='') Laptop
+              .col-2.navbar-other-item
+                a.danhmuc(href='') Th&#x1EC3; thao
+                div
+                ul.chil-danhmuc
+                  li
+                    a(href='') B&oacute;ng &dstrok;&aacute;
+                  li
+                    a(href='') Qu&#x1EA7;n v&#x1EE3;t
+                  li
+                    a(href='') B&oacute;ng r&#x1ED5;
+              .col-2.navbar-other-item
+                a.danhmuc(href='') Gi&aacute;o d&#x1EE5;c
+                div
+                ul.chil-danhmuc
+                  li
+                    a(href='') Tuy&#x1EC3;n sinh
+                  li
+                    a(href='') H&#x1ECD;c b&#x1ED5;ng
+              .col-2.navbar-other-item
+                a.danhmuc(href='') V&abreve;n h&oacute;a
+                div
+                ul.chil-danhmuc
+                  li
+                    a(href='') &#x1EA8;m th&#x1EF1;c
+                  li
+                    a(href='') Du l&#x1ECB;ch
+                  li
+                    a(href='') Ngh&#x1EC7; thu&#x1EAD;t
+.body-search.container
+  .row
+    .col-9
+      h4 TÌM KIẾM
+      form.form-timkiem(action='/news/timkiem' method="GET")
+        input#exampleFormControlInput1.form-control(type='text' name="timkiem")
+        button(type='submit') T&igrave;m ki&#x1EBF;m
+      .soketqua T&igrave;m th&#x1EA5;y #{data.length} k&#x1EBF;t qu&#x1EA3;
+      ul.list-item
+        each value in data
+            li.item
+              a(href='' style='height: 100%;')
+                  .image-news(style='background-image:url(../' + value.url +');')
+                  .item-date-title
+                    h4= value.tieude
+                    div
+                        i.bi.bi-clock &nbsp;
+                        span= value.NgayDang
+                    span= value.tomtat
+include footer.pug

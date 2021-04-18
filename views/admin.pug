@@ -1,0 +1,308 @@
+doctype html
+head
+  meta(charset='utf-8')
+  title admin
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js')
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6' crossorigin='anonymous')
+  link(href='//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet')
+  link(href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css')
+  link(href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css')
+  link(href='./Css/admin.css?v=1.4.0' rel='stylesheet')
+body
+  .wrapper
+    .sidebar(data-color='purple')
+      .sidebar-wrapper
+        .logo
+          a.simple-text(href='')
+            | Qu&#x1EA3;n l&iacute;
+        ul.nav
+          li.active(onclick='thongke()')
+            div
+              i.fa.fa-line-chart
+              p(style='font-size: 14px;') Th&#x1ED1;ng k&ecirc;
+          li
+            div(onclick='bangquanli()')
+              i.fa.fa-calendar-o
+              p(style='font-size: 14px;') B&#x1EA3;ng qu&#x1EA3;n l&iacute;
+          li
+            div(onclick='dangbai()')
+              i.fa.fa-sticky-note
+              p(style='font-size: 14px;') &Dstrok;&abreve;ng b&agrave;i
+          li
+            div(onclick='thongbao()')
+              i.fa.fa-bell
+              p(style='font-size: 14px;') Th&ocirc;ng b&aacute;o
+    .main-panel
+      nav.navbar.navbar-default.navbar-fixed
+        .container-fluid
+          .navbar-header
+            a.navbar-brand(href='#') ADMIN
+      .content
+        #bodythongbao(style="position: absolute; height: 100%; width: 100%;display: flex; display: none;")
+          span
+          .thongbao
+            div
+              i.fa.fa-exclamation-circle
+            center B&#x1EA1;n c&oacute; th&#x1EF1;c s&#x1EF1; mu&#x1ED1;n x&oacute;a tin t&#x1EE9;c n&agrave;y!
+            .btn_thongbao
+              button(onclick = "ok()") OK
+              button(onclick = "Cancle()") Cancle
+        #container-fluid1
+          .row
+            canvas#linechart
+          .row
+            .body-header2.row
+              .col-lg-4.item
+                .single-cool-fact.mb-100
+                  .scf-icon
+                    i.fa.fa-paper-plane-o(style='font-size: 40px;')
+                  .scf-text
+                    h2
+                      span.counter= data2[0].soluongview
+                    p L&#x1B0;&#x1EE3;ng truy c&#x1EAD;p
+              .col-lg-4.item
+                .single-cool-fact.mb-100
+                  .scf-icon
+                    i.fa.fa-user-secret(style='font-size: 40px;')
+                  .scf-text
+                    h2
+                      span.counter= data3.length
+                    p S&#x1ED1; l&#x1B0;&#x1EE3;ng t&agrave;i kho&#x1EA3;n
+              .col-lg-4.item
+                .single-cool-fact.mb-100
+                  .scf-icon
+                    i.fa.fa-list-ul(style='font-size: 40px;')
+                  .scf-text
+                    h2
+                      span.counter= data4.length
+                    p S&#x1ED1; l&#x1B0;&#x1EE3;ng b&agrave;i &dstrok;&abreve;ng
+        #container-fluid2(style='display: none;')
+          form.container(action='/success' method="POST" enctype="multipart/form-data")
+            .mb-3
+              label.form-label(for='exampleFormControlInput1') Ti&ecirc;u &dstrok;&#x1EC1; tin t&#x1EE9;c
+              input#exampleFormControlInput1.form-control(type='text' name="tieude")
+            .mb-3
+              label.form-label(for='exampleFormControlTextarea1') T&oacute;m t&#x1EAF;t tin t&#x1EE9;c
+              textarea#exampleFormControlTextarea1.form-control(rows='3' name="tomtat")
+            .mb-3
+              label.form-label(for='exampleFormControlTextarea1') N&#x1ED9;i dung tin t&#x1EE9;c
+              textarea#exampleFormControlTextarea1.form-control(rows='3' name="noidung")
+            .mb-3
+              label.form-label(for='exampleFormControlTextarea1') Nh&#x1EAD;p t&ecirc;n t&aacute;c gi&#x1EA3;
+              input.form-control(type='text' name="username")
+            .mb-3
+              label.form-label(for='formFile') L&#x1EF1;a ch&#x1ECD;n file &#x1EA3;nh
+              input#formFile.form-control(type='file' name="avatar")
+            div
+              label.formFile.form-lable(for='') D&#x1EA1;ng tin t&#x1EE9;c
+              select.form-select(aria-label='Default select example' name="dangtintuc")
+                option(value='dang2') Tin v&#x1EAF;n t&#x1EAF;t
+                option(value='dang1') Tin ng&#x1EAF;n
+                option(value='dang3') Tin v&#x1EEB;a
+                option(value='dang4') Tin s&acirc;u
+                option(value='dang5') Tin t&#x1B0;&#x1EDD;ng thu&#x1EAD;t
+                option(value='dang6') Tin t&#x1ED5;ng h&#x1EE3;p
+            div
+              label.formFile.form-lable(for='') Th&#x1EC3; lo&#x1EA1;i tin t&#x1EE9;c
+              select.form-select(aria-label='Default select example' name="theloai")
+                option(value='theloai1') Th&#x1EBF; gi&#x1EDB;i
+                option(value='theloai10') Khoa h&#x1ECD;c
+                option(value='theloai11') &Dstrok;&#x1EDD;i s&#x1ED1;ng
+                option(value='theloai12') Esport
+                option(value='theloai9') C&ocirc;ng ngh&#x1EC7;
+                option(value='theloai2') X&atilde; h&#x1ED9;i
+                option(value='theloai3') V&abreve;n h&oacute;a
+                option(value='theloai4') King t&#x1EBF;
+                option(value='theloai5') Gi&aacute;o d&#x1EE5;c
+                option(value='theloai6') Th&#x1EC3; thao
+                option(value='theloai7') Gi&#x1EA3;i tr&iacute;
+                option(value='theloai8') Ph&aacute;p lu&#x1EAD;t
+            .button-post
+              button(type='submit') Submit
+              button Home
+        #container-fluid3(style='display: none;background-color: white;')
+          span BẢNG QUẢN LÍ TIN TỨC
+          div(style='margin: 0 10px; height: 400px; overflow-y:auto; border-radius: 2px; padding: 10px 20px; box-shadow:0px 0px 2px 1px #8888;')
+            table.table
+              thead
+                tr
+                  th(scope='row') stt
+                  th(scope='col') T&ecirc;n Tin T&#x1EE9;c
+                  th(scope='col') Th&#x1EC3; lo&#x1EA1;i
+                  th(scope='col') D&#x1EA1;ng tin t&#x1EE9;c
+                  th(scope='col') N&#x1ED9;i dung
+                  th(scope='col')
+                  th(scope='col')
+              tbody
+              each value in data4
+                tr(id="tablelist" + value.id_tintuc)
+                  th(scope='row')= value.sapxep
+                  td
+                    input.textField(id="tentintuc"+value.id_tintuc type='text' value=value.tieude onchange = "changetintuc(this.id)")
+                  td
+                    select.form-select(id="tentheloa"+value.id_tintuc name="tentheloai" onchange="changetintuc(this.id)")
+                      option(value=("" + value.idtheloai))= value.tentheloai
+                      option(value='theloai1') Th&#x1EBF; gi&#x1EDB;i
+                      option(value='theloai10') Khoa h&#x1ECD;c
+                      option(value='theloai11') &Dstrok;&#x1EDD;i s&#x1ED1;ng
+                      option(value='theloai12') Esport
+                      option(value='theloai9') C&ocirc;ng ngh&#x1EC7;
+                      option(value='theloai2') X&atilde; h&#x1ED9;i
+                      option(value='theloai3') V&abreve;n h&oacute;a
+                      option(value='theloai4') King t&#x1EBF;
+                      option(value='theloai5') Gi&aacute;o d&#x1EE5;c
+                      option(value='theloai6') Th&#x1EC3; thao
+                      option(value='theloai7') Gi&#x1EA3;i tr&iacute;
+                      option(value='theloai8') Ph&aacute;p lu&#x1EAD;t
+                  td
+                    select.form-select(id="dangtintu"+value.id_tintuc name="dangtenloai" onchange="changetintuc(this.id)")
+                      option(value=(''+value.iddangtintuc))= value.tendangtintuc
+                      option(value='dang1') Tin ng&#x1EAF;n
+                      option(value='dang3') Tin v&#x1EEB;a
+                      option(value='dang4') Tin s&acirc;u
+                      option(value='dang5') Tin t&#x1B0;&#x1EDD;ng thu&#x1EAD;t
+                      option(value='dang6') Tin t&#x1ED5;ng h&#x1EE3;p
+                  td
+                    input.textField(id="noidungtt"+value.id_tintuc type='text' value=value.noidung onchange="changetintuc(this.id)")
+                  td(style="position: relative;")
+                    button(id = "btn_ghinhan" + value.id_tintuc onclick="submit(this.id)") Ghi nh&#x1EAD;n
+                    span(id = "ghinhan" + value.id_tintuc style="position: absolute;")
+                  td
+                    button(id = "xoatin"+ value.id_tintuc onclick="deletenews(this.id)") X&oacute;a
+          div.doubletable(style='display: flex; margin-top: 20px;')
+            div(style="margin: 0 10px;width: 50%;height: 300px; box-shadow:0px 0px 2px 1px #8888;padding: 10px; overflow-y: auto")
+              span BẢNG QUẢN LÍ NGƯỜI DÙNG
+              table.table.tableleft
+                thead
+                  tr
+                    th(scope='col') stt
+                    th(scope='col') &#x1EA2;nh &dstrok;&#x1EA1;i di&#x1EC7;n
+                    th(scope='col') T&ecirc;n
+                    th(scope='col') password
+                tbody
+                each value in data3
+                  tr(style='height: 20px;')
+                    th(scope='row') 1
+                    td
+                      .anhdaidien(style='background-image: url(https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png);')
+                    td= value.userName
+                    td= value.Password
+            
+            div(style="margin: 0 10px; width: 50%; height: 300px;box-shadow:0px 0px 2px 1px #8888;padding: 10px; overflow-y: auto;")
+              span BẢNG QUẢN LÍ QUẢNG CÁO
+              table.table.tableright()
+                thead
+                  tr
+                    th(scope='col') #
+                    th(scope='col') T&ecirc;n Qu&#x1EA3;ng c&aacute;o
+                    th(scope='col') Url &#x1EA3;nh
+                    th(scope='col') T&ecirc;n th&#x1EC3; lo&#x1EA1;i
+                tbody
+                each value in [1,2,1,1,1,1,1]
+                  tr
+                    th(scope='row') 1
+                    td qu&#x1EA3;ng c&aacute;o chu&#x1ED9;t logitech
+                    td img/quangcao1.png
+                    td c&ocirc;ng ngh&#x1EC7;
+    footer#dulieu= data1
+    footer#dulieu2
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+  script.
+    var data = document.getElementById('dulieu').innerHTML.split(',')
+    const labels = [
+    '15 day ago',
+    '14 day ago',
+    '13 day ago',
+    '12 day ago',
+    '11 day ago',
+    '10 day ago',
+    '9 day ago',
+    '8 day ago',
+    '7 day ago',
+    '6 day ago',
+    '5 day ago',
+    '4 day ago',
+    '3 day ago',
+    '2 day ago',
+    '1 day ago',
+    'Now',
+    ];
+    console.log(data)
+    var CHART = document.getElementById('linechart');
+    var line_chart = new Chart(CHART, {
+    type: 'line',
+    data: {
+    labels: labels,
+    datasets: [{
+    pointBackgroundColor: "red",
+    label: 'Thống kê lượt truy cập trang wed trong 15 ngày gần nhất',
+    borderColor: 'rgb(75, 192, 192)',
+    tension: 0.1,
+    data: data,
+    }]
+    }
+    })
+script.
+  function dangbai(){
+  document.getElementById('container-fluid1').style.display = "none";
+  document.getElementById('container-fluid2').style.display = "block";
+  document.getElementById('container-fluid3').style.display = "none";
+  document.getElementById('container-fluid4').style.display = "none";
+  }
+  function thongke(){
+  document.getElementById('container-fluid1').style.display = "block";
+  document.getElementById('container-fluid2').style.display = "none";
+  document.getElementById('container-fluid3').style.display = "none";
+  document.getElementById('container-fluid4').style.display = "none";
+  }
+  function thongbao(){
+  }
+  function bangquanli(){
+  document.getElementById('container-fluid1').style.display = "none";
+  document.getElementById('container-fluid2').style.display = "none";
+  document.getElementById('container-fluid3').style.display = "block";
+  document.getElementById('container-fluid4').style.display = "none";
+  }
+  function changetintuc(value) {
+    var id = value.substr(9,8);
+    $('#ghinhan'+ id).html('&ensp; <i class="fa fa-info-circle" style="color: orange"></i>')
+  }
+  function submit(value, tieude, idtheloai, noidung, iddangtintuc){
+    var id = value.substr(11, 8);
+    var tieude = $('#tentintuc'+id).val();
+    var idtheloai = document.getElementById('tentheloa'+id).value;
+    var iddangtintuc = document.getElementById('dangtintu' + id).value;
+    var noidung = $('#noidungtt' + id).val();
+    $('#ghinhan' + id).html('&ensp; <i class="fa fa-check-circle" style="color: green"></i>');
+    $.post("/updatetintuc",
+        {
+          id_tintuc: id,
+          tieude: tieude,
+          idtheloai: idtheloai,
+          noidung: noidung,
+          iddangtintuc: iddangtintuc
+        },
+        function(data,status){
+          alert("Data: " + data + "\nStatus: " + status);
+        });
+        setTimeout("$('#ghinhan" + id + "').html('')", 1000);
+  }
+  function deletenews(value) {
+    document.getElementById('bodythongbao').style.display = "block";
+    $("#dulieu2").val(value.substr(6,8))
+  }
+  function Cancle(){
+    document.getElementById('bodythongbao').style.display ="none";
+  }
+  function ok(){
+    var id = $('#dulieu2').val();
+    $.post("/deletenews",
+    {
+      id: id
+    }
+    ,function(data, status){
+      alert("Data: " + data + "\nStatus: " + status);
+    });
+    document.getElementById('bodythongbao').style.display ="none";
+    $('#tablelist'+id).remove();
+  }

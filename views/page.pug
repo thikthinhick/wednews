@@ -1,0 +1,397 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css')
+  link(rel="preconnect" href="https://fonts.gstatic.com")
+  link(rel="shortcut icon" type="image/png" href="../img/icon.ico")
+  link(href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet")
+  link(href="https://fonts.googleapis.com/css2?family=Montserrat" rel="stylesheet")
+  link(href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet")
+  script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+  link(rel='stylesheet' href='../Css/comment.css')
+  link(rel='stylesheet' href='../Css/header.css')
+  link(rel='stylesheet' href='../Css/Mystyle.css')
+  title #{data1[0].tieude}
+.header
+  .container
+    .row.header-1
+      .col-4
+        a.logo(href="/")
+          | NEWSPAPER
+        span.logo-title
+          | Trang tin &dstrok;i&#x1EC7;n t&#x1EED;
+      .col-5
+        .search
+          form(action='news/timkiem' method="get")
+            input.input-search(type='text' placeholder='Nhập từ khóa cần tìm kiếm' name="timkiem")
+            a(href='/')
+              i.bi.bi-search
+      .col-3.loginvspost
+        if data3.length > 0
+          .user-account(style='display: flex;')
+            #anhdaidien(style='background-image:url(../IMG/avatar2.png); text-align: center; margin: 0px; padding: 0px; color: white;') &nbsp;
+            span#name #{data3[0].userName}
+            .signout
+              i.bi.bi-bell-fill(onclick = "clickNotification('" + data3[0].idUser + "')" style="position: relative;")
+                if data3[0].soluongthongbao > 0
+                  #soluong-thongbao(style="position: absolute;font-size: 10px; padding: 1px;")= data3[0].soluongthongbao
+              .thongbao-signout(style='position:absolute;' id = "yyyy")
+            .signout
+              i.bi.bi-caret-down-fill(onclick="clicksignout()")
+              ul.signout-child#xxxx
+                li
+                  i.bi.bi-gear-fill
+                  | C&agrave;i &dstrok;&#x1EB7;t
+                li
+                  a(href='/dangxuat')
+                    i.bi.bi-box-arrow-right
+                    | &Dstrok;&abreve;ng xu&#x1EA5;t
+        else
+          a.user-post(href='/login', re)
+            span.text-login
+              i.fa.fa-user-o &nbsp;
+              |Đăng nhập
+  .header-navbar
+    ul.list.container
+      li.button
+        a.button-link(href='/chude/theloai11')
+          | TH&#x1EDC;I S&#x1EF0;
+      li.button
+        a.button-link(href='/chude/theloai1')
+          | TH&#x1EBE; GI&#x1EDA;I
+      li.button
+        a.button-link(href='/chude/theloai7')
+          | GI&#x1EA2;I TR&Iacute;
+      li.button
+        a.button-link(href='/chude/theloai12')
+          | TH&#x1EC2; THAO
+      li.button
+        a.button-link(href='/chude/theloai10')
+          | KHOA H&#x1ECC;C
+      li.button
+        a.button-link(href='/chude/theloai8')
+          | PH&Aacute;P LU&#x1EAC;T
+      .list-bar
+        #btn
+          i.bi.bi-list
+        #cancle
+          i.bi.bi-x
+        #sautatca.header-navbar-other
+          ul.container
+            .row
+              .col-2.navbar-other-item
+                a.danhmuc(href='') Th&#x1EBF; gi&#x1EDB;i
+                div
+                ul.chil-danhmuc
+                  li
+                    
+                    a(href='')
+                      i.bi.bi-chevron-down &nbsp; Qu&acirc;n s&#x1EF1;
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; Covid-19
+              .col-2.navbar-other-item
+                a.danhmuc(href='') X&atilde; h&#x1ED9;i
+                div
+                ul.chil-danhmuc
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; Th&#x1EDD;i s&#x1EF1;
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; Giao Th&ocirc;ng
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; M&ocirc;i tr&#x1B0;&#x1EDD;ng
+              .col-2.navbar-other-item
+                a.danhmuc(href='') C&ocirc;ng ngh&#x1EC7;
+                div
+                ul.chil-danhmuc
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; &Dstrok;i&#x1EC7;n tho&#x1EA1;i
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; M&aacute;y t&iacute;nh b&#x1EA3;ng
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; Laptop
+              .col-2.navbar-other-item
+                a.danhmuc(href='') Th&#x1EC3; thao
+                div
+                ul.chil-danhmuc
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; B&oacute;ng &dstrok;&aacute;
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; Qu&#x1EA7;n v&#x1EE3;t
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; B&oacute;ng r&#x1ED5;
+              .col-2.navbar-other-item
+                a.danhmuc(href='') Gi&aacute;o d&#x1EE5;c
+                div
+                ul.chil-danhmuc
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; Tuy&#x1EC3;n sinh
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; H&#x1ECD;c b&#x1ED5;ng
+              .col-2.navbar-other-item
+                a.danhmuc(href='') V&abreve;n h&oacute;a
+                div
+                ul.chil-danhmuc
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; &#x1EA8;m th&#x1EF1;c
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; Du l&#x1ECB;ch
+                  li
+                    a(href='') 
+                      i.bi.bi-chevron-down &nbsp; Ngh&#x1EC7; thu&#x1EAD;t
+.header-body.container
+  span.title
+    | TECHNOLOGY
+  .row
+    .col-8
+      h2= data1[0].tieude
+      .mota
+        span(style='font-weight: 600;') by #{data1[0].userName} &emsp;
+        span #{data1[0].NgayDang} &emsp; 
+        i.fa.fa-eye &nbsp; 
+        span #{data1[0].numberofviews} Views&emsp; 
+      .image-page(style='background-image:url(../' + data1[0].url + ');')
+      .noidung= data1[0].noidung
+      .footer-body
+        .tag
+          span#tinlienquan Tin li&ecirc;n quan
+          ul.list-item(style='display: flex;')
+            li.col-3
+              a(href='')
+                .item(style='background-image: url(../IMG/image4.jpg); height:100px;')
+                span
+                  | One of my best photos Etiam ultricies nisi vel augue. Curabitur ullamcorper
+                  | ultricies
+                  | nisi.
+            li.col-3
+              a(href='' style='height: 100%')
+                .item(style='background-image: url(../IMG/image4.jpg); height:100px;')
+                span
+                  | One of my best photos Etiam ultricies nisi vel augue. Curabitur ullamcorper
+                  | ultricies
+                  | nisi.
+            li.col-3
+              a(href='' style='height: 100%')
+                .item(style='background-image: url(../IMG/image4.jpg); height:100px;')
+                span
+                  | One of my best photos Etiam ultricies nisi vel augue. Curabitur ullamcorper
+                  | ultricies
+                  | nisi.
+            li.col-3
+              a(href='' style='height: 100%')
+                .item(style='background-image: url(../IMG/image4.jpg); height:100px;')
+                span
+                  | One of my best photos Etiam ultricies nisi vel augue. Curabitur ullamcorper
+                  | ultricies
+                  | nisi.
+          .comment
+            span.tieude B&Igrave;NH LU&#x1EAC;N
+            textarea.form-control(rows='3' placeholder='Nội dung bình luận' id="input-comment")
+            button(type='button' id="button-comment" onclick = "binhluanbai()") G&#x1EED;i
+            ul.list-comment
+              each value in data2
+                li.comment-item
+                  .khung-left
+                    .hinhanh(style='background-image:url("../IMG/avatar2.png")')
+                  .khung-right
+                    .main
+                      .username-comment= value.userName
+                      .noidung-comment= value.noidung_binhluan
+                      .like-dislike-reply
+                        .like(id="like"+value.idbinhluan onclick="doLike(this.id)")
+                          i.fa.fa-thumbs-up &nbsp; 
+                          span(id="numberslike" + value.idbinhluan) #{value.luotthich}
+                        .dislike(id="dislike"+value.idbinhluan onclick ="dodisLike(this.id)")
+                          i.fa.fa-thumbs-down &nbsp;
+                          span(id="numbersdislike" + value.idbinhluan) #{value.luotkhongthich}
+                        .traloi(id= "traloi" + value.idbinhluan style='font-size: 15px' onclick="reply(this.id)") Tr&#x1EA3; l&#x1EDD;i
+                    .reply-binhluan(id= "reply-binhluan" + value.idbinhluan)
+                      input.inputtraloi(id = "inputtraloi" + value.idbinhluan type='text' placeholder='Nhập bình luận của bạn')
+                      .btn
+                        .btn-cancle(id = "btn-cancle" + value.idbinhluan onclick='Cancle(this.id)') H&#x1EE6;Y
+                        .btn-reply(id = "btn-reply" + value.idbinhluan onclick="traloi(this.id)") TR&#x1EA2; L&#x1EDC;I
+                    .hideviews(id = "hideviews" + value.idbinhluan style='font-size: 15px; font-weight: 500; margin-left: 20px;' onclick='showList(this.id)') Xem c&acirc;u tr&#x1EA3; l&#x1EDD;i
+                    ul.danhsach(id = "danhsach" + value.idbinhluan style='display: none;')    
+    .col-4
+      .quangcao
+        .hinhanh-quangcao(style='background-image:url(../IMG/banner-02.jpg);')
+      .quangcao
+        .hinhanh-quangcao(style='background-image:url(../IMG/likeandsub.jpg);')
+script(src="../js/account.js")
+script.
+  function binhluanbai() {
+    var dulieu = laydulieu();
+    console.log(dulieu)
+    if(dulieu.iduser){
+    var noidung = $('#input-comment').val();
+     $('#input-comment').val('');
+    $.post("/comment-page",
+    {
+      id_tintuc: dulieu.id_tintuc,
+      noidung: noidung,
+      iduser: dulieu.iduser,
+      url_icon: "img/hinhanh"
+    },
+    function(data, status){
+       var value = '<li class="comment-item">'
+                + '<div class="khung-left">'
+                + '<div class="hinhanh" style="background-image:url(../IMG/avatar2.png)">' + '</div>'
+                + '</div>'
+                + '<div class="khung-right">'
+                + '<div class="main">'
+                + '<div class="username-comment">' +  dulieu.username + '</div>'
+                + '<div class="noidung-comment">' + noidung + '</div>'
+                + '<div class="like-dislike-reply">'
+                + '<div class="like" id="like' + data +  '" onclick="doLike(this.id)"><i class="fa fa-thumbs-up">&nbsp; </i><span id="numberslike' + data + '">0</span></div>'
+                + '<div class="dislike" id="dislike' + data + '" onclick="dodisLike(this.id)"><i class="fa fa-thumbs-down">&nbsp;</i><span id="numbersdislike' + data + '">0</span></div>'
+                + '<div class="traloi" id="traloi' + data + '" style="font-size: 15px" onclick="reply(this.id)">Tr&#x1EA3; l&#x1EDD;i</div>'
+                + '</div>'
+                + '</div>'
+                + '<div class="reply-binhluan" id="reply-binhluan' + data + '" >'
+                + '<input class="inputtraloi" id="inputtraloi' + data + '" type="text" placeholder="Nhập bình luận của bạn" />'
+                + '<div class="btn">'
+                + '<div class="btn-cancle" id="btn-cancle' + data + '" onclick="Cancle(this.id)">H&#x1EE6;Y</div>'
+                + '<div class="btn-reply" id="btn-reply' + data + '" onclick="traloi(this.id)">TR&#x1EA2; L&#x1EDC;I</div>'
+                + '</div>'
+                + '</div>'
+                + '<div class="hideviews" id="hideviews' + data + '" style="font-size: 15px; font-weight: 500; margin-left: 20px;" onclick="showList(this.id)">Xem c&acirc;u tr&#x1EA3; l&#x1EDD;i</div>'
+                + '<ul class="danhsach" id="danhsach' + data + '" style="display: none;"> </ul>'
+                + '</div>'
+                + '</li>'
+    $(".list-comment").prepend(value);
+    });
+    }
+    else{
+      alert("Bạn cần đăng nhập để thực hiện bình luận!")
+    }
+  }
+  function reply(value) {
+    var x = value.substr(6,4);
+    document.getElementById("reply-binhluan" + x).style.display = "block";
+  }
+  function Cancle(value){
+    var x = value.substr(10, 4)
+  document.getElementById('reply-binhluan' + x).style.display = "none"
+  }
+  function traloi(value){
+    var dulieu = laydulieu()
+    if(dulieu.iduser){
+      var id = value.substr(9,4);
+      var noidung = $('#inputtraloi' + id).val();
+      var x = '<li class="comment-item">'
+            + '<div class="khung-left">'
+            +	'<div class="hinhanh" style="background-image:url(../img/avatar2.png);"></div></div>'
+            + '<div class="khung-right">'
+            + '<div class="main">'
+            + '<div class="username-comment">' + dulieu.username + '</div>'
+            + '<div class="noidung-comment">' + noidung + '</div></div></li>';
+      $('#danhsach'+ id).prepend(x);
+      $('#inputtraloi'+ id).val('');
+      document.getElementById('danhsach' + id).style.display = "block";
+      document.getElementById('reply-binhluan' + id).style.display = "none"
+      $.post("/replycomment",
+        {
+          id: id,
+          id_tintuc: dulieu.id_tintuc,
+          noidung: noidung,
+          iduser: dulieu.iduser,
+          url_icon: "img/hinhanh"
+        },
+        function(data,status){
+          alert("Data: " + data + "\nStatus: " + status);
+        });
+    }
+    else{
+      alert("Bạn cần đăng nhập để bình luận này!")
+    } 
+  }
+  function showList(value){
+  var id = value.substr(9, 4);
+  var x = document.getElementById('danhsach'+id).style.display;
+  var count = $('#danhsach' + id).children().length;  
+  if(x === "none"){
+  $.post("/showlistcomment",
+    {
+      id: id,
+    },
+    function(data,status){
+      var length = data.length;
+      $('#danhsach'+ id).empty()
+      for(let i = 0; i < length; i++) {
+        var noidung = $('#inputtraloi' + id).val();
+    var x = '<li class="comment-item">'
+            + '<div class="khung-left">'
+            +	'<div class="hinhanh" style="background-image:url(../IMG/avatar2.png);"></div></div>'
+            + '<div class="khung-right">'
+            + '<div class="main">'
+            + '<div class="username-comment">' + data[i].userName + '</div>'
+            + '<div class="noidung-comment">' + data[i].noidung_binhluan + '</div></div></li>';
+  $('#danhsach'+ id).prepend(x);
+      }
+    });
+  document.getElementById('danhsach'+ id).style.display = "block";
+  document.getElementById('hideviews'+ id).innerHTML = "Ẩn câu trả lời";
+  }
+  else{
+  document.getElementById('danhsach'+ id).style.display = "none";
+  document.getElementById('hideviews'+ id).innerHTML = "Xem câu trả lời"
+  $('#danhsach'+ id).empty()
+  }
+  }
+  function doLike(value) {
+    var id = value.substr(4,4)
+    var numberlike = parseInt(document.getElementById('numberslike'+id).innerHTML);
+    ++numberlike;
+    document.getElementById('numberslike'+id).innerHTML = numberlike;
+    $.ajax({
+            type: "POST",
+            url: "/dolike",
+            data: { id: id, likes: String(numberlike)},
+            success: function(data) {
+            },
+            error: function(jqXHR, textStatus, err) {
+                alert('text status '+textStatus+', err '+err)
+            }
+        });
+  }
+  function dodisLike(value) {
+    var id = value.substr(7,4)
+    var numberdislike = parseInt(document.getElementById('numbersdislike'+id).innerHTML);
+    ++numberdislike;
+    document.getElementById('numbersdislike'+id).innerHTML = numberdislike;
+    $.get("/dodislike",
+    {
+      id: id,
+      dislikes: String(numberdislike)
+    },
+    function(data,status){
+      alert("Data: " + data + "\nStatus: " + status);
+    });
+  }
+  function laydulieu(){
+    var id_tintuc = document.URL.split('/')[4];
+    var cookies = document.cookie.split(';');
+    var iduser, username;
+    if(cookies.length > 1){
+      username = document.getElementById('name').innerHTML;
+      iduser = cookies[0].split('=')[1]
+    }
+    var data = {id_tintuc: id_tintuc, iduser: iduser, username: username}
+    return data
+  }

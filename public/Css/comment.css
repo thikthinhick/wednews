@@ -1,0 +1,89 @@
+body{
+  font-family: Open Sans;
+  font-size: 14px;
+}
+.comment-item{
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0px;
+}
+.comment-item .khung-left{
+  flex: 1;
+}
+.khung-left .hinhanh{
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin:auto;
+}
+.comment-item .khung-right{
+  flex: 8;
+  margin-right: 10px;
+}
+.khung-right .main{
+  background-color: #f2f3f5;
+  border-radius: 20px;
+  padding-left: 25px;
+}
+.comment-item .username-comment{
+  color: black;
+  font-weight: 600;
+}
+.main .noidung-comment{
+  font-weight: 400;
+}
+.like-dislike-reply{
+  display: flex;
+}
+.like-dislike-reply div{
+  margin-right: 20px;
+}
+.reply-binhluan{
+ margin-top: 10px;
+ display: none;
+}
+.reply-binhluan input{
+  width: 90%;
+  margin-left: 10%;
+  border: none;
+  border-bottom: 1px solid gray;
+}
+.reply-binhluan .btn{
+  display: flex;
+  float: right;
+  margin-left: 20px;
+  margin-top: 4px;
+}
+.reply-binhluan .btn div{
+  margin: 0px 20px;
+  color: gray;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 2px 6px;
+}
+.reply-binhluan input:focus{
+  outline: none;
+}
+.btn span:hover{
+  cursor: pointer;
+}
+.fa-thumbs-down, .fa-thumbs-up{
+    cursor: pointer;
+}
+.traloi:hover{
+    cursor: pointer;
+}
+.btn-reply:hover{
+  cursor: pointer;
+}
+.hideviews:hover{
+  cursor:pointer;
+}
+.reply-binhluan .btn div:hover{
+    cursor: pointer;
+    background-color: #f2f3f5;
+}
+
