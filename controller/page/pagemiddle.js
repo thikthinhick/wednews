@@ -8,8 +8,8 @@ module.exports.loadpage = function (req, res) {
     else
     user_id = ''
     var sql1 = "SELECT * from tintuc inner join userpost on tintuc.iduser = userpost.iduser where id_tintuc = '" + id + "'";
-    var sql2 = "Select * from binhluan inner join userpost on binhluan.iduser = userpost.iduser where id_tintuc = '" + id + "' and id_binhluan_me is null" 
-    var sql3 = "select * from userpost where iduser = '" + user_id + "'";
+    var sql2 = "Select *, substr(username,1,1) as firstname from binhluan inner join userpost on binhluan.iduser = userpost.iduser where id_tintuc = '" + id + "' and id_binhluan_me is null" 
+    var sql3 = "select *, substr(username,1,1) as firstname from userpost where iduser = '" + user_id + "'";
     conn.query('update tintuc set numberofviews = numberofviews + 1 where id_tintuc = ' + "'" + id + "'" , function (err, data) {
         if (err) throw err
     });

@@ -31,8 +31,11 @@ head
       .col-3.loginvspost
         if user
           .user-account(style='display: flex;')
-            #anhdaidien(style='background-image:url(img/avatar2.png); text-align: center; margin: 0px; padding: 0px; color: white;')
-            span #{user.userName}
+            if(user.UserUrl == null)
+              #anhdaidien(style='background-color:' + user.UserColor + '; text-align: center; margin: 0px;padding-left: 0px; color: white;')= user.firstName
+            else
+              #anhdaidien(style='background-image:url(' + user.UserUrl + ');')
+            span #{user.userName} 
             .signout
               i.bi.bi-bell-fill(onclick = "clickNotification('" + user.idUser + "')" style="position: relative;")
                 if user.soluongthongbao > 0
@@ -177,7 +180,7 @@ head
                     i.bi.bi-clock &nbsp;
                     span= data[0].ngaydang
             .carousel-item
-              a(href='')
+              a(href='page/' + data[1].id_tintuc)
                 .item(style='height: 370px; background-image:url(' + data[1].url + ');')
                   .style-item= data[1].tentheloai
                   h4.text-title= data[1].tieude
@@ -188,7 +191,7 @@ head
                     i.bi.bi-clock &nbsp;
                     span= data[1].ngaydang
             .carousel-item
-              a(href='')
+              a(href='page/' + data[2].id_tintuc)
                 .item(style='height: 370px; background-image:url(' +data[2].url + ')')
                   .style-item= data[2].tentheloai
                   h4.text-title= data[2].tieude
@@ -206,7 +209,7 @@ head
             span.sr-only Next
       .col-lg-6.items-right
         .item1
-          a.hover-dark(href='')
+          a.hover-dark(href='page/' + data[3].id_tintuc)
             .item(style="background-image:url(" + data[3].url +')')
               .style-item= data[3].tentheloai
               h4.text-title= data[3].tieude
@@ -218,7 +221,7 @@ head
                 span= data[3].ngaydang
         .double-item
           .item2
-            a(href='')
+            a(href='page/' + data[4].id_tintuc)
               .item(style="background-image:url(" + data[4].url +')')
                 .style-item= data[4].tentheloai
                 h6.text-title= data[4].tieude
@@ -229,7 +232,7 @@ head
                   i.bi.bi-clock &nbsp;
                   span= data[4].ngaydang
           .item3
-            a(href='')
+            a(href='page/' + data[5].id_tintuc)
               .item(style="background-image:url(" + data[5].url +')')
                 .style-item= data[5].tentheloai
                 h6.text-title= data[5].tieude
@@ -251,7 +254,7 @@ head
           a(href='') Games
         .body-Entertain
           .left.col-6
-            a(href='')
+            a(href='page/' + data[6].id_tintuc)
               .item(style='height: 86%; background-image: url(' + data[6].url + ');')
             h4= data[6].tieude
             .date-title
@@ -260,7 +263,7 @@ head
               span= data[6].ngaydang
           ul.right.col-6
             li.right-item
-              a(href='')
+              a(href='page/' + data[7].id_tintuc)
                 .item(style='background-image:url(' + data[7].url + ')')
                 .title-date
                   span= data[7].tieude
@@ -268,7 +271,7 @@ head
                     i.bi.bi-clock &nbsp;
                     span= data[7].ngaydang
             li.right-item
-              a(href='')
+              a(href='page/' + data[0].id_tintuc)
                 .item(style='background-image:url(' + data[8].url + ')')
                 .title-date
                   span= data[8].tieude
@@ -276,7 +279,7 @@ head
                     i.bi.bi-clock &nbsp;
                     span= data[8].ngaydang
             li.right-item
-              a(href='')
+              a(href='page/' + data[0].id_tintuc)
                 .item(style='background-image:url(' + data[9].url + ')')
                 .title-date
                   span= data[9].tieude
@@ -306,7 +309,7 @@ head
     .title TIN N&#x1ED4;I B&#x1EAC;T
     ul.row
       li.col-4
-        a(href='')
+        a(href='page/' + data[10].id_tintuc)
           .item(style='background-image:url(' + data[10].url + ')')
             .style-item= data[10].tentheloai
             h4.text-title= data[10].tieude
@@ -318,7 +321,7 @@ head
               span= data[10].ngaydang
         span= data[10].tomtat
       li.col-4
-        a(href='')
+        a(href='page/' + data[11].id_tintuc)
           .item(style='background-image:url(' + data[11].url + ')')
             .style-item= data[11].tentheloai
             h4.text-title= data[11].tieude
@@ -330,7 +333,7 @@ head
               span= data[11].ngaydang
         span= data[11].tomtat
       li.col-4
-        a(href='')
+        a(href='page/' + data[12].id_tintuc)
           .item(style='background-image:url(' + data[12].url + ')')
             .style-item= data[12].tentheloai
             h4.text-title= data[12].tieude
@@ -345,7 +348,7 @@ head
     .title &Dstrok;&Aacute;NG CH&Uacute; &Yacute;
     ul.row
       li.col-4
-        a(href='')
+        a(href='page/' + data[13].id_tintuc)
           .item(style='background-image: url(' + data[13].url + ');')
           .title-date
             span= data[13].tieude
@@ -353,7 +356,7 @@ head
               i.bi.bi-clock &nbsp;
               span= data[13].ngaydang
       li.col-4
-        a(href='')
+        a(href='page/' + data[14].id_tintuc)
           .item(style='background-image: url(' + data[14].url + ');')
           .title-date
             span= data[14].tieude
@@ -361,7 +364,7 @@ head
               i.bi.bi-clock &nbsp;
               span= data[14].ngaydang
       li.col-4
-        a(href='')
+        a(href='page/' + data[15].id_tintuc)
           .item(style='background-image: url(' + data[15].url + ');')
           .title-date
             span= data[15].tieude
@@ -370,7 +373,7 @@ head
               span= data[15].ngaydang
     ul.row
       li.col-4
-        a(href='')
+        a(href='page/' + data[16].id_tintuc)
           .item(style='background-image: url(' + data[16].url + ');')
           .title-date
             span= data[16].tieude
@@ -387,7 +390,7 @@ head
               span= data[17].ngaydang
       li.col-4
         a(href='')
-          .item(style='background-image: url(' + data[18] + ');')
+          .item(style='background-image: url(' + data[18].url + ');')
           .title-date
             span= data[18].tieude
             .date-item

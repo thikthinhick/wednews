@@ -32,8 +32,11 @@ head
       .col-3.loginvspost
         if data3.length > 0
           .user-account(style='display: flex;')
-            #anhdaidien(style='background-image:url(../img/avatar2.png); text-align: center; margin: 0px; padding: 0px; color: white;') &nbsp;
-            span#name #{data3[0].userName}
+            if(data3[0].UserUrl == null)
+              #anhdaidien(style='background-color:' + data3[0].UserColor + '; text-align: center; margin: 0px;padding-left: 0px; color: white;')= data3[0].firstname
+            else
+              #anhdaidien(style='background-image:url(' + data3[0].UserUrl + ');')
+            span #{data3[0].userName}
             .signout
               i.bi.bi-bell-fill(onclick = "clickNotification('" + data3[0].idUser + "')" style="position: relative;")
                 if data3[0].soluongthongbao > 0
@@ -166,7 +169,7 @@ head
         span #{data1[0].NgayDang} &emsp; 
         i.fa.fa-eye &nbsp; 
         span #{data1[0].numberofviews} Views&emsp; 
-      .image-page(style='background-image:url(../' + data1[0].url + ');')
+      .image-page(style='background-image:url(' + data1[0].url + ');')
       .noidung= data1[0].noidung
       .footer-body
         .tag
@@ -208,7 +211,10 @@ head
               each value in data2
                 li.comment-item
                   .khung-left
-                    .hinhanh(style='background-image:url("../img/avatar2.png")')
+                    if(value.UserUrl)
+                      .hinhanh(style='background-image:url(' + value.UserUrl + ')')
+                    else
+                      .hinhanh(style="background-color:" + value.UserColor) #{value.firstname}
                   .khung-right
                     .main
                       .username-comment= value.userName
@@ -233,11 +239,19 @@ head
         .hinhanh-quangcao(style='background-image:url(../img/banner-02.jpg);')
       .quangcao
         .hinhanh-quangcao(style='background-image:url(../img/likeandsub.jpg);')
+if(data3[0])
+  #name(style="font-size:0px;") #{data3[0].userName}
+  #nameurl(style="font-size: 0px;") #{data3[0].UserUrl}
+  #namecolor(style='font-size: 0px;') #{data3[0].UserColor}
 script(src="../js/account.js")
 script.
   function binhluanbai() {
     var dulieu = laydulieu();
-    console.log(dulieu)
+    var x;
+    if(dulieu.userurl === '')
+      x = '<div class="hinhanh" style="background-color:' + dulieu.usercolor + '">' +dulieu.username.substr(0,1) + '</div>'
+    else
+      x = '<div class="hinhanh" style="background-image:url(' + dulieu.userurl + ')">' + '</div>'
     if(dulieu.iduser){
     var noidung = $('#input-comment').val();
      $('#input-comment').val('');
@@ -245,13 +259,12 @@ script.
     {
       id_tintuc: dulieu.id_tintuc,
       noidung: noidung,
-      iduser: dulieu.iduser,
-      url_icon: "img/hinhanh"
+      iduser: dulieu.iduser
     },
     function(data, status){
        var value = '<li class="comment-item">'
                 + '<div class="khung-left">'
-                + '<div class="hinhanh" style="background-image:url(../img/avatar2.png)">' + '</div>'
+                + x
                 + '</div>'
                 + '<div class="khung-right">'
                 + '<div class="main">'
@@ -291,12 +304,17 @@ script.
   }
   function traloi(value){
     var dulieu = laydulieu()
+    var x;
+    if(dulieu.userurl === '')
+      x = '<div class="hinhanh" style="background-color:' + dulieu.usercolor + '">' + dulieu.username.substr(0,1) + '</div></div>'
+    else
+      x = '<div class="hinhanh" style="background-image:url(' + dulieu.userurl + ')">' + '</div></div>'
     if(dulieu.iduser){
       var id = value.substr(9,4);
       var noidung = $('#inputtraloi' + id).val();
       var x = '<li class="comment-item">'
             + '<div class="khung-left">'
-            +	'<div class="hinhanh" style="background-image:url(../img/avatar2.png);"></div></div>'
+            +	x
             + '<div class="khung-right">'
             + '<div class="main">'
             + '<div class="username-comment">' + dulieu.username + '</div>'
@@ -311,7 +329,6 @@ script.
           id_tintuc: dulieu.id_tintuc,
           noidung: noidung,
           iduser: dulieu.iduser,
-          url_icon: "img/hinhanh"
         },
         function(data,status){
           alert("Data: " + data + "\nStatus: " + status);
@@ -335,9 +352,14 @@ script.
       $('#danhsach'+ id).empty()
       for(let i = 0; i < length; i++) {
         var noidung = $('#inputtraloi' + id).val();
-    var x = '<li class="comment-item">'
+        var y;
+          if(!data[i].userurl)
+          y = '<div class="hinhanh" style="background-color:' + data[i].UserColor + '">' + data[i].userName.substr(0,1) + '</div></div>'
+          else
+          y = '<div class="hinhanh" style="background-image:url(' + data[i].UserUrl + ')">' + '</div></div>'
+          var x = '<li class="comment-item">'
             + '<div class="khung-left">'
-            +	'<div class="hinhanh" style="background-image:url(../img/avatar2.png);"></div></div>'
+            +	y
             + '<div class="khung-right">'
             + '<div class="main">'
             + '<div class="username-comment">' + data[i].userName + '</div>'
@@ -390,8 +412,10 @@ script.
     var iduser, username;
     if(cookies.length > 1){
       username = document.getElementById('name').innerHTML;
+      userurl = document.getElementById('nameurl').innerHTML;
+      usercolor = document.getElementById('namecolor').innerHTML;
       iduser = cookies[0].split('=')[1]
     }
-    var data = {id_tintuc: id_tintuc, iduser: iduser, username: username}
+    var data = {id_tintuc: id_tintuc, iduser: iduser, username: username, userurl: userurl, usercolor: usercolor}
     return data
   }

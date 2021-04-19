@@ -9,16 +9,14 @@ module.exports.postNews = function(req, res) {
         id_tintuc += _sym[parseInt(Math.random() * (_sym.length))];
     }
     var url = req.file.path;
-    var x = url.split('\\');
-    url = x[1] + '/' + x[2];
     var tomtat = object.tomtat;
     var tieude = object.tieude;
     var noidung = object.noidung;
     var iddangtintuc = object.dangtintuc;
     var idtheloai = object.theloai;
     var iduser = 'admin';
-    var sql2 = "insert into tintuc(id_tintuc, ngaydang, url, tomtat, tieude, noidung, iddangtintuc, idtheloai, iduser, sapxep) values ('"+id_tintuc+"', now(),'"+url+"','"+
-    tomtat+"','"+tieude+"','"+noidung+"','"+iddangtintuc+"','"+idtheloai+"','"+iduser+"', 1)"
+    var sql2 = "insert into tintuc(id_tintuc, ngaydang, url, tomtat, tieude, noidung, iddangtintuc, idtheloai, iduser) values ('"+id_tintuc+"', now(),'"+url+"','"+
+    tomtat+"','"+tieude+"','"+noidung+"','"+iddangtintuc+"','"+idtheloai+"','"+iduser+"')"
     conn.query(sql1, function(err, data) {
         if(err) throw err
     })
@@ -27,6 +25,7 @@ module.exports.postNews = function(req, res) {
     if(err) throw err
     })
     conn.query(sql2, function(err, data){
+        if(err) throw err
         if(err){
             res.send('thatbai!')
         }

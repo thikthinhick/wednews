@@ -4,8 +4,8 @@ const conn = require("../../connectDatabase/Connection");
 module.exports = function(req, res, next) {
     var sql1 = "SELECT count(id_visitor) as views, extract(day from date_visitor) as day from visitors GROUP BY date_visitor HAVING date_visitor <= date(now()) and date_visitor >= adddate(date(now()), interval - 15 day)" ;
     var sql2 =  "SELECT count(*) as soluongview from visitors";
-    var sql3 = "select * from userpost";
-    var sql4 = 'SELECT id_tintuc,tendangtintuc,tintuc.iddangtintuc, tintuc.idtheloai, tieude, tentheloai, noidung, sapxep FROM tintuc INNER JOIN  theloai On tintuc.idTheLoai= theloai.idtheloai INNER JOIN dangtintuc on tintuc.idDangTinTuc = dangtintuc.iddangtintuc ORDER by sapxep asc'
+    var sql3 = "select *, ROW_NUMBER() OVER (ORDER BY ngaytaotaikhoan) AS stt from userpost";
+    var sql4 = 'SELECT ROW_NUMBER() OVER (ORDER BY ngaydang DESC) AS stt ,id_tintuc,tendangtintuc,tintuc.iddangtintuc, tintuc.idtheloai, tieude, tentheloai, noidung FROM tintuc INNER JOIN  theloai On tintuc.idTheLoai= theloai.idtheloai INNER JOIN dangtintuc on tintuc.idDangTinTuc = dangtintuc.iddangtintuc ORDER by ngaydang desc'
     conn.query(sql1, function(err, data1) {
         if(err) throw err
         var value = [];

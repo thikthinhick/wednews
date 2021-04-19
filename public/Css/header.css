@@ -270,6 +270,7 @@ ul{
 }
 .thongbao-signout div ul li .hinhanh-thongbao{
     flex: 1;
+    color: white;
 }
 .thongbao-signout div ul li .noidung-thongbao{
     flex: 6;
@@ -300,6 +301,11 @@ ul{
     background-size: cover;
     background-position: center;
     border-radius: 25px;
+    line-height: 50px;
+    align-items: center;
+    font-size: 22px;
+    padding-left: 20px;
+    font-weight: 600;
 }
 
 #soluong-thongbao{

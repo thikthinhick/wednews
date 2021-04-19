@@ -10,22 +10,9 @@ var page = require('./controller/page/pagemiddle')
 var admin = require('./controller/admin/middleadmin')
 var conn = require('./connectDatabase/Connection');
 const app = express();
-var multer  = require('multer');
 const { render } = require('pug');
 const cookieParser = require('cookie-parser');
 const { query } = require('./connectDatabase/Connection');
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, './public/img')
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.originalname)
-    }
-});
-  
-var upload = multer({ storage: storage });
-
-// khai bao su dung pug
 app.set('view engine', 'pug');  
 app.set('views', './views');
 // khai bao su dung body.parser
@@ -33,18 +20,32 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cookieParser())
 app.use( function(req, res, next) {
-
   if (req.originalUrl && req.originalUrl.split("/").pop() === 'favicon.ico') {
     return res.sendStatus(204);
   }
   return next();
-
 });
 app.use(express.static('public'));
 app.use('/', userRouter);
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const multer = require('multer');
+cloudinary.config({
+  cloud_name: 'clouduet',
+  api_key: '573147231385865',
+  api_secret: 'a6XHlMNsiDYiBJaeoY8bWcUW350'
+});
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'upload',
+    format: async (req, file) => 'jpg',
+    public_id: (req, file) => 'computed-filename-using-request',
+  },
+});
+const parser = multer({ storage: storage });
 app.get('/',session, middle.home);
-app.post('/success', upload.single('avatar'), x.postNews)
-app.post('/',upload.single('avatar'), middle.home)
+app.post('/success', parser.single('avatar'), x.postNews)
 app.get('/login', function(req, res) {
   res.render('login')
 })
@@ -124,7 +125,7 @@ app.post('/deletenews', function(req, res) {
 })
 app.post('/thongbao', function(req, res) {
   var id = req.body.iduser;
-  var sql = "select ngaybinhluan, url, noidung_binhluan, userName,('binhluan') as type from binhluan inner join tintuc on binhluan.id_tintuc = tintuc.id_tintuc inner join userpost on userpost.iduser = binhluan.iduser where id_binhluan_me in (select idbinhluan from binhluan where iduser = '" + id + "' and id_binhluan_me is null) union select NgayDang as ngaybinhluan, url, tieude as noidung_binhluan, iduser as username, ('baidang') as type from tintuc where ngaydang >= (select ngaytaotaikhoan from userpost where iduser = '" + id + "') order by ngaybinhluan DESC"
+  var sql = "select usercolor, userurl, ngaybinhluan, url, noidung_binhluan, userName,('binhluan') as type from binhluan inner join tintuc on binhluan.id_tintuc = tintuc.id_tintuc inner join userpost on userpost.iduser = binhluan.iduser where id_binhluan_me in (select idbinhluan from binhluan where iduser = '" + id + "' and id_binhluan_me is null) union select 'red' as usercolor, './img/avatar2.png' as userurl, NgayDang as ngaybinhluan, url, tieude as noidung_binhluan, iduser as username, ('baidang') as type from tintuc where ngaydang >= (select ngaytaotaikhoan from userpost where iduser = '" + id + "') order by ngaybinhluan DESC"
   
   conn.query(sql, function(err, data) {
     if(err) throw err
@@ -133,11 +134,12 @@ app.post('/thongbao', function(req, res) {
   sql = "update userpost set soluongthongbao = 0 where iduser = '" + id + "';"
   conn.query(sql, function(err, data) {
     if(err) throw err
+    
   })
 })
 app.get('/admin',admin)
 
 app.get('/news/timkiem', timkiem.search);
 app.get('/page/:idtintuc', page.loadpage)
-app.listen(process.env.PORT, function(){
+app.listen(3000, function(){
 })
