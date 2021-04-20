@@ -51,6 +51,23 @@ app.get('/login', function(req, res) {
 })
 app.post('/xulilogin', login.login)
 app.post('/xulitao', login.signup)
+app.post('/anhdaidien',parser.single('avatar'),function(req, res) {
+  var sql;
+  var url;
+  var color = req.body.color;
+  var iduser = req.body.iduser
+  if(req.file){
+     url = req.file.path;
+     sql = "update userpost set userurl = '" + url + "', usercolor = '" + color + "' where iduser = '" + iduser + "';"
+  } 
+  else{
+    sql = "update userpost set usercolor = '" + color + "' where iduser = '" + iduser + "';"
+  }
+  conn.query(sql, function(err, data) {
+    if(err) throw err
+  })
+  res.redirect('/')
+})
 app.post('/comment-page', function(req, res) {
   var value = req.body;
   var _sym = 'abcdefghijklmnopqrstuvwxyz1234567890';
@@ -141,5 +158,5 @@ app.get('/admin',admin)
 
 app.get('/news/timkiem', timkiem.search);
 app.get('/page/:idtintuc', page.loadpage)
-app.listen(process.env.PORT, function(){
+app.listen(process.env.PORT), function(){
 })

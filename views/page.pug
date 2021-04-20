@@ -353,7 +353,8 @@ script.
       for(let i = 0; i < length; i++) {
         var noidung = $('#inputtraloi' + id).val();
         var y;
-          if(!data[i].userurl)
+        
+          if(!data[i].UserUrl)
           y = '<div class="hinhanh" style="background-color:' + data[i].UserColor + '">' + data[i].userName.substr(0,1) + '</div></div>'
           else
           y = '<div class="hinhanh" style="background-image:url(' + data[i].UserUrl + ')">' + '</div></div>'
