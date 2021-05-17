@@ -36,6 +36,7 @@ function clickNotification(iduser) {
             function (data, status) {
                 var html = '<div><h6>Thông báo</h6><ul>'
                 for (let i = 0; i < data.length; i++) {
+                    console.log(data[i].url)
                     var x;
                     if (data[i].type === 'baidang') x = '</p> đã tải lên:  "'
                     else x = '</p> đã trả lời:  "'
@@ -48,7 +49,7 @@ function clickNotification(iduser) {
                         + '<div class="noidung-thongbao">'
                         + '<div class="noidung"><p style="margin-bottom: 0px; display: inline-block; font-weight:bold;">' + data[i].userName + x + data[i].noidung_binhluan + '"</div>'
                         + '<div class="thoigian">' + Datediff(data[i].ngaybinhluan) + '</div></div>'
-                        + '<div class="anhlienket" style="background-image: url(' + data[i].url + ');background-image: url(../' + data[i].url + ')"></div>'
+                        + '<div class="anhlienket" style="background-image: url(' + data[i].url + ');background-image: url('+ data[i].url + ')"></div>'
                         + '</li>')
                 }
                 html += '</ul></div>'

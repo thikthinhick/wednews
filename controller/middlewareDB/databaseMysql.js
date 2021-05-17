@@ -2,7 +2,7 @@ var conn = require('../../connectDatabase/Connection')
 module.exports.home = function(req, res){
     var x = req.cookies
     var sql1 = 'select *, substr(username, 1,1) as firstName from userpost'
-    var sql ='SELECT id_tintuc, date(ngaydang) as ngaydang, username, url, tieude, tomtat, tentheloai, sapxep FROM tintuc INNER JOIN  theloai On tintuc.idTheLoai= theloai.idtheloai INNER JOIN userpost on tintuc.idUser = userpost.idUser ORDER by ngaydang DESC';
+    var sql ='SELECT id_tintuc, date(ngaydang) as ngaydang, username, url, tieude, tomtat, tentheloai, sapxep FROM tintuc INNER JOIN  theloai On tintuc.idTheLoai= theloai.idtheloai INNER JOIN userpost on tintuc.idUser = userpost.idUser ORDER by sapxep';
     conn.query(sql, function(err, data) {
         if(err) throw err
         for(let i = 0; i < data.length; i++) {
