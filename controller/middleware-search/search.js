@@ -1,7 +1,7 @@
 const conn = require('../../connectDatabase/Connection');
 module.exports.search = function(req, res){
     var x = req.query.timkiem;
-    var sql = "SELECT * FROM tintuc WHERE tomtat LIKE '%" + x + "%';"
+    var sql = "SELECT * FROM tintuc WHERE tieude LIKE '%" + x + "%';"
     conn.query(sql, function(err, data) {
         if(err) throw err
         res.render('search-page', {data: data});
