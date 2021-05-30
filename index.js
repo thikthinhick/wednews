@@ -158,5 +158,5 @@ app.get('/admin',admin)
 
 app.get('/news/timkiem', timkiem.search);
 app.get('/page/:idtintuc', page.loadpage)
-app.listen(3000, function(){
+app.listen(process.env.PORT, function(){
 })
